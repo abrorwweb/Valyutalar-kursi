@@ -1,80 +1,46 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js';
+import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Tooltip } from 'chart.js';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip);
 
-export default function Chart({ coinId }) {
-  const [chartData, setChartData] = useState([]);
+export default function Chart({ id }) {
+  const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
     const fetchChartData = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=7`
-        );
-        setChartData(response.data.prices);
-      } catch (error) {
-        console.error("Grafik ma'lumotlarini olishda xato:", error);
-      }
+      const res = await axios.get(
+        `https://api.coingecko.com/api/v3/coins/${id}/market_chart`,
+        {
+          params: {
+            vs_currency: 'usd',
+            days: 7,
+          },
+        }
+      );
+
+      const prices = res.data.prices;
+      setChartData({
+        labels: prices.map(price => new Date(price[0]).toLocaleDateString()),
+        datasets: [
+          {
+            label: 'Narx (USD)',
+            data: prices.map(price => price[1]),
+            borderColor: 'rgba(59,130,246,1)', // blue-500
+            fill: false,
+            tension: 0.3,
+          },
+        ],
+      });
     };
 
     fetchChartData();
-  }, [coinId]);
+  }, [id]);
 
-  if (!chartData.length) return <div className="text-center py-4">Grafik yuklanmoqda...</div>;
+  if (!chartData) return <div>Grafig yuklanmoqda...</div>;
 
   return (
-    <div className="mt-6">
-      <Line
-        data={{
-          labels: chartData.map(([timestamp]) => 
-            new Date(timestamp).toLocaleDateString()),
-          datasets: [{
-            label: 'Narx (USD)',
-            data: chartData.map(([, price]) => price),
-            borderColor: 'rgb(59, 130, 246)',
-            backgroundColor: 'rgba(59, 130, 246, 0.1)',
-            tension: 0.1
-          }]
-        }}
-        options={{
-          responsive: true,
-          plugins: {
-            legend: { position: 'top' },
-            tooltip: {
-              callbacks: {
-                label: (context) => `$${context.parsed.y.toFixed(2)}`
-              }
-            }
-          },
-          scales: {
-            y: {
-              ticks: {
-                callback: (value) => `$${value}`
-              }
-            }
-          }
-        }}
-      />
-    </div>
+    <Line data={chartData} />
   );
 }
