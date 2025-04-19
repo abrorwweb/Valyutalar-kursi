@@ -35,12 +35,12 @@ export default function CoinDetail() {
 
     fetchCoinData();
 
-    // Komponent unmount bo'lganda so'rovni bekor qilish
+    
     return () => {
       const source = axios.CancelToken.source();
       source.cancel("Komponent yopildi, so'rov bekor qilindi");
     };
-  }, [id, navigate]); // id yoki navigate o'zgarganda qayta ishlaydi
+  }, [id, navigate]); 
 
   const handleRefresh = async () => {
     setLoading(true);
