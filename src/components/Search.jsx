@@ -3,8 +3,8 @@ const Search = ({ search, setSearch }) => {
       <div className="mb-6">
         <input
           type="text"
-          placeholder="Bitcoin, Ethereum..."
-          className="input input-bordered w-full"
+          placeholder="Search..."
+          className="input  input-bordered w-full mt-8"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
