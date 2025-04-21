@@ -9,7 +9,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/coin/:id" element={<CoinDetail />} />
+      <Route path="/coins/:id" element={<CoinDetail />} />
       <Route path="/markets" element={<Markets />} />
       <Route path="/login" element={<Login />} />
       <Route path="/portfolio" element={<Portfolio />} />

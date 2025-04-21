@@ -5,35 +5,39 @@ const CoinCard = ({ coin }) => {
 
   return (
     <Link
-      to={`/coin/${coin.id}`}
-      className="group block rounded-xl p-5 bg-white dark:bg-gray-800 shadow-md hover:shadow-xl transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 border border-gray-200 dark:border-gray-700"
+      to={`/coins/${coin.id}`}
+      className="min-w-[200px] bg-white/90 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-md flex flex-col items-center transition-transform hover:scale-105 hover:shadow-xl hover:border-indigo-400 dark:hover:border-indigo-600 duration-300 group"
     >
-      <div className="flex items-center gap-4">
-        <img
-          src={coin.image}
-          alt={coin.name}
-          className="w-12 h-12 rounded-full border border-gray-300 dark:border-gray-600 group-hover:rotate-[15deg] transition-transform duration-300"
-        />
-        <div>
-          <h2 className="text-lg font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
-            {coin.name}
-          </h2>
-          <p className="uppercase text-sm text-gray-500 dark:text-gray-400">{coin.symbol}</p>
-        </div>
-      </div>
+      
+      <img
+        src={coin.image}
+        alt={coin.name}
+        className="w-12 h-12 mb-3 rounded-full border border-gray-300 dark:border-gray-600 group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300"
+      />
 
-      <div className="mt-4">
-        <p className="text-xl font-semibold text-gray-800 dark:text-white">
-          ${coin.current_price.toLocaleString()}
-        </p>
-        <p
-          className={`mt-1 text-sm font-medium ${
-            isPositive ? 'text-green-500' : 'text-red-500'
-          }`}
-        >
-          {isPositive ? '▲' : '▼'} {coin.price_change_percentage_24h.toFixed(2)}%
-        </p>
-      </div>
+      
+      <h2 className="text-lg font-bold text-gray-800 dark:text-white group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors duration-300">
+        {coin.name}
+      </h2>
+
+      
+      <p className="uppercase text-xs tracking-widest text-gray-500 dark:text-gray-400">
+        {coin.symbol}
+      </p>
+
+      
+      <p className="mt-3 text-xl font-semibold text-gray-800 dark:text-white">
+        ${coin.current_price.toLocaleString()}
+      </p>
+
+      
+      <p
+        className={`mt-1 text-sm font-medium ${
+          isPositive ? 'text-green-500' : 'text-red-500'
+        }`}
+      >
+        {isPositive ? '▲' : '▼'} {coin.price_change_percentage_24h.toFixed(2)}%
+      </p>
     </Link>
   );
 };

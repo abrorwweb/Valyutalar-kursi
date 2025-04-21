@@ -4,6 +4,7 @@ import CoinCard from "../components/CoinCard";
 import Search from "../components/Search";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CarouselCoins from "../components/CarouselCoins";
 
 const Home = () => {
   const [coins, setCoins] = useState([]);
@@ -44,6 +45,7 @@ const Home = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-200 via-blue-100 to-cyan-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-gray-100 px-4 py-6">
       <div className="max-w-7xl mx-auto">
         <Navbar />
+        <CarouselCoins />
 
         <div className="mt-6 mb-8">
           <Search search={search} setSearch={setSearch} />

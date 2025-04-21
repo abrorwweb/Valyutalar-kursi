@@ -2,6 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import { FaSignInAlt } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
+import Navbar from "../components/Navbar";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -23,6 +24,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-200 to-blue-100 dark:from-gray-900 dark:to-gray-800 px-4">
+      <Navbar />
       <div className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-2xl w-full max-w-md relative">
         {/* Orqaga tugmasi */}
         <Link

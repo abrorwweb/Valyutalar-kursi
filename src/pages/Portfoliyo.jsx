@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import { GoArrowLeft } from "react-icons/go";
+import Navbar from "../components/Navbar";
 
 export default function Portfolio() {
   const [user, setUser] = useState(null);
@@ -27,6 +28,7 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-200 dark:from-gray-900 dark:to-gray-800 p-6 flex items-center justify-center">
+      <Navbar />
       <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 max-w-md w-full">
         {/* Orqaga tugmasi */}
         <Link

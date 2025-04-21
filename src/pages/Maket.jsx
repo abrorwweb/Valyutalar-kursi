@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
+import Navbar from "../components/Navbar";
 
 export default function Markets() {
   const [coins, setCoins] = useState([]);
@@ -16,7 +17,7 @@ export default function Markets() {
             params: {
               vs_currency: "usd",
               order: "market_cap_desc",
-              per_page: 60,
+              per_page: 100,
               page: 1,
               sparkline: false,
             },
@@ -44,6 +45,7 @@ export default function Markets() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
+      <Navbar />
       {/* Back Button */}
       <div className="mb-4">
         <Link
